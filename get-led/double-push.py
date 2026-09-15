@@ -1,0 +1,33 @@
+import RPi.GPIO as GPIO
+import time 
+GPIO.setmode(GPIO.BCM)
+leds = [24, 22, 23, 37, 17, 25, 12, 16]
+GPIO.setup(leds, GPIO.OUT)
+GPIO.output(leds, 0)
+light_time = 0.2
+b_up=9
+b_down=10
+GPIO.setup(b_up, GPIO.IN)
+GPIO.setup(b_down, GPIO.IN)
+num = 0
+def dec2bin(value):
+    return[int(element) for element in bin(value)[2:].zfill(8)]
+sleep_time=0.2
+while True:
+    if(GPIO.input(b_down)*GPIO.input(b_up)):
+        help=num
+        num=255
+        time.sleep(sleep_time)
+    elif GPIO.input(b_down):
+        num+=1
+        if num>255:
+            num=0
+        print(num, dec2bin(num))
+        time.sleep(sleep_time)
+    elif GPIO.input(b_up):
+        num-=1
+        if num<0:
+            num=255
+        print(num, dec2bin(num))
+        time.sleep(sleep_time)
+    GPIO.output(leds, dec2bin(num))
