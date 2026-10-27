@@ -1,6 +1,6 @@
 import smbus
 class MCP4725:
-    def __init__(self, dynamic_range, address=0x61, verbose = True):
+    def __init__(self, dynamic_range, address=0x61, verbose=False):
         self.bus = smbus.SMBus(1)
         
         self.address = address
@@ -34,7 +34,7 @@ class MCP4725:
         self.set_number(res)
         return
 if __name__ == "__main__":
-    dac = MCP4725( 3.183, True)
+    dac = MCP4725( 4.2, True)
     try:        
         while True:
             try:
