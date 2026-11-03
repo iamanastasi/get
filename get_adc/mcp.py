@@ -2,8 +2,8 @@ import mcp3021_driver as driver
 import adc_plot as plot
 import time 
 voltage_values=[]
-time_values=[]
-duration=5.0
+time_values=[]    
+duration=30.0
 i2c = driver.MCP3021(dynamic_range=5.16)
 try:
     start=time.time()
